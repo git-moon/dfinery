@@ -2,7 +2,7 @@
   <div id="dashboard">
     <ResizableBox :elements="drags" draggable>
       <template #default="props">
-        <Resizable v-for="drag in props.items" :item="drag" :key="drag.key" class="px-2 py-3">
+        <Resizable v-for="drag in props.items" :item="drag" :key="drag.key">
           <component :is="drag.component" v-bind="drag.bind" />
         </Resizable>
       </template>
@@ -73,19 +73,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.resizable-box {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.resizable {
-  min-width: 250px;
-  min-height: 200px;
-  height: 100%;
-
-  resize: both;
-  overflow: auto;
-}
-</style>

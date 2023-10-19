@@ -84,6 +84,8 @@ export default {
 
   resize: both;
   overflow: hidden;
+
+  padding: 8px 12px;
 }
 
 .resizable:hover .icon__resize {
