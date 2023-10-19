@@ -1,22 +1,25 @@
 <template>
   <div id="dashboard">
-    <vuedraggable v-model="drags" class="resizable-box">
-      <div
-        v-for="drag in drags"
-        :key="drag.key"
-        class="px-2 py-3 resizable"
-        :style="{ width: `${(drag.cols / 12) * 100}%` }"
-      >
-        <component :is="drag.component" v-bind="drag.bind" />
-      </div>
-    </vuedraggable>
+    <ResizableBox :elements="drags" draggable>
+      <template #default="props">
+        <Resizable
+          v-for="drag in props.items"
+          :key="drag.key"
+          class="px-2 py-3"
+          :style="{ width: `${(drag.cols / 12) * 100}%` }"
+        >
+          <component :is="drag.component" v-bind="drag.bind" />
+        </Resizable>
+      </template>
+    </ResizableBox>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import vuedraggable from 'vuedraggable'
 
+import ResizableBox from './resizable/ResizableBox.vue'
+import Resizable from './resizable/Resizable.vue'
 import CountSummary from './dashboard/CountSummary.vue'
 import DAU from './dashboard/DAU.vue'
 import TopReferralPie from './dashboard/TopReferralPie.vue'
@@ -24,7 +27,8 @@ import CountIp from './dashboard/CountIp.vue'
 
 export default {
   components: {
-    vuedraggable,
+    ResizableBox,
+    Resizable,
     CountSummary,
     DAU,
     TopReferralPie,
@@ -34,20 +38,30 @@ export default {
     return {
       drags: [
         {
-          key: 1,
+          key: 'uniqueView',
           cols: 6,
           component: 'CountSummary',
           bind: { summaryKey: 'unique_view', title: '접속유저' },
         },
         {
-          key: 2,
+          key: 'pageView',
           cols: 6,
           component: 'CountSummary',
           bind: { summaryKey: 'page_view', title: '접속횟수' },
         },
-        { key: 3, cols: 12, component: 'DAU', bind: { title: 'DAU' } },
-        { key: 4, cols: 6, component: 'TopReferralPie', bind: { title: 'Top Referral' } },
-        { key: 5, cols: 6, component: 'CountIp', bind: { title: 'Top Referral' } },
+        { key: 'dau', cols: 12, component: 'DAU', bind: { title: 'DAU' } },
+        {
+          key: 'topReferral',
+          cols: 6,
+          component: 'TopReferralPie',
+          bind: { title: 'Top Referral' },
+        },
+        {
+          key: 'countIp',
+          cols: 6,
+          component: 'CountIp',
+          bind: { title: 'Top Referral' },
+        },
       ],
     }
   },
