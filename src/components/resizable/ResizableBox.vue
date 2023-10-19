@@ -52,7 +52,6 @@ export default {
     },
     loadSettings() {
       const myDrags = localStorage.getItem(this.dragKey)
-      console.log(myDrags)
       if (!myDrags) {
         this.drags = [...this.elements]
         return
@@ -62,6 +61,13 @@ export default {
       const dragKeys = myDrags.split(',')
       const tempDrags = dragKeys.map((drag) => {
         const el = this.elements.filter((el) => el.key === drag)[0]
+        let sizeSettings = localStorage.getItem(el.key)
+        if (sizeSettings) {
+          sizeSettings = JSON.parse(sizeSettings)
+          const { width, height } = sizeSettings
+          el.width = width
+          el.height = height
+        }
         return el
       })
       this.drags = tempDrags
@@ -75,7 +81,6 @@ export default {
       this.dragStore = keyList
     },
     onUpdate() {
-      console.log('update')
       this.saveSettings(this.dragKey, this.dragStore)
     },
   },
