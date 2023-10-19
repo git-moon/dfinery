@@ -48,19 +48,10 @@ export default {
   },
   methods: {
     saveSettings(key, value) {
-      localStorage.setItem(key, value)
+      localStorage.setItem(key, JSON.stringify(value))
     },
     loadSettings() {
-      const myDrags = localStorage.getItem(this.dragKey)
-      if (!myDrags) {
-        this.drags = [...this.elements]
-        return
-      }
-
-      // 저장 순서에 따른 엘리먼트 배치
-      const dragKeys = myDrags.split(',')
-      const tempDrags = dragKeys.map((drag) => {
-        const el = this.elements.filter((el) => el.key === drag)[0]
+      let tempDrags = this.elements.map((el) => {
         let sizeSettings = localStorage.getItem(el.key)
         if (sizeSettings) {
           sizeSettings = JSON.parse(sizeSettings)
@@ -68,6 +59,19 @@ export default {
           el.width = width
           el.height = height
         }
+        return el
+      })
+
+      const dragSettings = localStorage.getItem(this.dragKey)
+      if (!dragSettings) {
+        this.drags = tempDrags
+        return
+      }
+
+      // 저장 순서에 따른 엘리먼트 배치
+      const dragKeys = JSON.parse(dragSettings)
+      tempDrags = dragKeys.map((drag) => {
+        const el = this.tempDrags.filter((el) => el.key === drag)[0]
         return el
       })
       this.drags = tempDrags
