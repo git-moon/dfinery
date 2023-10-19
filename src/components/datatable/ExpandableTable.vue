@@ -5,6 +5,7 @@
     :sort-desc="sort.desc"
     hide-default-header
     hide-default-footer
+    disable-pagination
   >
     <template v-slot:item="props">
       <tr @click="clickRow(props)">
