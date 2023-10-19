@@ -9,7 +9,7 @@
     <template v-slot:item="props">
       <tr @click="clickRow(props)">
         <td
-          style="width: 30%"
+          style="width: 35%"
           class="td-border"
           :class="{ 'cursor--pointer': hasExpand(props.item) }"
         >
@@ -32,7 +32,7 @@
       </tr>
     </template>
     <template v-slot:expanded-item="{ item }">
-      <tr v-if="item.isSelected">
+      <tr v-show="item.isSelected">
         <td :colspan="headers.length" class="pa-0">
           <ExpandableTable
             :headers="headers"
@@ -92,7 +92,7 @@ export default {
         return
       }
       item.isSelected = !item.isSelected
-      props.expand(item.isSelected)
+      props.expand(true)
     },
   },
 }

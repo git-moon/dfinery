@@ -8,7 +8,6 @@
           :items="dataTable"
           :sort-by="sort.by"
           :sort-desc="sort.desc"
-          single-expand
         >
           <template v-slot:header>
             <thead>
@@ -44,7 +43,7 @@
             </tr>
           </template>
           <template v-slot:expanded-item="{ item }">
-            <tr v-if="item.isSelected">
+            <tr v-show="item.isSelected">
               <td :colspan="headers.length" class="pa-0">
                 <ExpandableTable
                   :headers="headers"
@@ -99,7 +98,7 @@ export default {
       const unique = this.region.metric[0]
 
       return [
-        { text: groupBy.join(' > '), value: 'text', width: '30%', sortable: false },
+        { text: groupBy.join(' > '), value: 'text', width: '35%' },
         { text: `sum(${unique.label})`, value: 'value' },
       ]
     },
@@ -113,13 +112,13 @@ export default {
     clickRow(props) {
       const { item } = props
       item.isSelected = !item.isSelected
-      props.expand(item.isSelected)
+      props.expand(true)
     },
     makeIpMap(map, arr, depth) {
       // ip별 count를 저장하는 재귀함수
 
       // 지역이 공백인 경우 'empty' 로 처리
-      const ipKey = arr[0] || 'empty'
+      const ipKey = arr[0] || '(empty)'
       if (depth < 2) {
         const value = map.get(ipKey) || { value: 0 }
         value.value = parseInt(arr[1])
