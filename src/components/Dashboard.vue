@@ -2,12 +2,7 @@
   <div id="dashboard">
     <ResizableBox :elements="drags" draggable>
       <template #default="props">
-        <Resizable
-          v-for="drag in props.items"
-          :key="drag.key"
-          class="px-2 py-3"
-          :style="{ width: `${(drag.cols / 12) * 100}%` }"
-        >
+        <Resizable v-for="drag in props.items" :item="drag" :key="drag.key" class="px-2 py-3">
           <component :is="drag.component" v-bind="drag.bind" />
         </Resizable>
       </template>
@@ -39,27 +34,27 @@ export default {
       drags: [
         {
           key: 'uniqueView',
-          cols: 6,
           component: 'CountSummary',
+          width: '50%',
           bind: { summaryKey: 'unique_view', title: '접속유저' },
         },
         {
           key: 'pageView',
-          cols: 6,
           component: 'CountSummary',
+          width: '50%',
           bind: { summaryKey: 'page_view', title: '접속횟수' },
         },
         { key: 'dau', cols: 12, component: 'DAU', bind: { title: 'DAU' } },
         {
           key: 'topReferral',
-          cols: 6,
           component: 'TopReferralPie',
+          width: '50%',
           bind: { title: 'Top Referral' },
         },
         {
           key: 'countIp',
-          cols: 6,
           component: 'CountIp',
+          width: '50%',
           bind: { title: 'Top Referral' },
         },
       ],
