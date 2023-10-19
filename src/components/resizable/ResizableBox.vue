@@ -71,7 +71,7 @@ export default {
       // 저장 순서에 따른 엘리먼트 배치
       const dragKeys = JSON.parse(dragSettings)
       tempDrags = dragKeys.map((drag) => {
-        const el = this.tempDrags.filter((el) => el.key === drag)[0]
+        const el = tempDrags.filter((el) => el.key === drag)[0]
         return el
       })
       this.drags = tempDrags
