@@ -1,0 +1,56 @@
+{
+	"name": "Vue (Community)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"octref.vetur",
+				"formulahendry.auto-close-tag",
+				"formulahendry.auto-rename-tag",
+				"ms-azuretools.vscode-docker",
+				"eamodio.gitlens",
+				"ecmel.vscode-html-css",
+				"abusaidm.html-snippets",
+				"xabikos.JavaScriptSnippets",
+				"eg2.vscode-npm-script",
+				"esbenp.prettier-vscode",
+				"sdras.vue-vscode-snippets"
+			],
+			"settings": {
+				"editor.tabSize": 2,
+				"editor.formatOnSave": false,
+				"editor.codeActionsOnSave": {
+					"source.fixAll.eslint": true
+				},
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"eslint.probe": ["javascript", "typescript", "html", "vue", "markdown"],
+				"auto-close-tag.activationOnLanguage": [
+					"javascript", "typescript", "html", "vue", "markdown"
+				],
+				"auto-rename-tag.activationOnLanguage": ["*"]
+			}
+		}
+	},
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		8080
+	],
+	
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+	
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/vue-cli:2": {}
+	}
+}
