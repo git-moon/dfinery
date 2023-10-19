@@ -1,6 +1,9 @@
 <template>
   <div class="resizable" :style="styleSize">
     <slot></slot>
+    <p class="icon__resize">
+      <v-icon color="white">mdi-resize-bottom-right</v-icon>
+    </p>
   </div>
 </template>
 
@@ -74,11 +77,30 @@ export default {
 
 <style scoped>
 .resizable {
+  position: relative;
   min-width: 250px;
   min-height: 200px;
   height: 100%;
 
   resize: both;
-  overflow: auto;
+  overflow: hidden;
+}
+
+.resizable:hover .icon__resize {
+  display: block;
+}
+
+.icon__resize {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+
+  background-color: rgb(25, 118, 210, 0.8);
+  border-radius: 4px;
+
+  margin: 0;
 }
 </style>
