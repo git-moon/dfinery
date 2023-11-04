@@ -1,21 +1,20 @@
-import client from './core/client'
+// import client from './core/client'
 
-const API_URL = 'https://static.adbrix.io/front/coding-test'
+// const API_URL = ''
 
 export const getDailyReport = async () => {
-  const endpoint = API_URL + '/event_1.json'
-  const result = await client.get(endpoint)
-  return result
+  // const endpoint = API_URL + '/event_1.json'
+  // const result = await client.get(endpoint)
+  const { event_1 } = (await import('./sample/dashboard')).default
+  return event_1
 }
 
 export const getReferral = async () => {
-  const endpoint = API_URL + '/event_3.json'
-  const result = await client.get(endpoint)
-  return result
+  const { event_3 } = (await import('./sample/dashboard')).default
+  return event_3
 }
 
 export const getRegion = async () => {
-  const endpoint = API_URL + '/event_4.json'
-  const result = await client.get(endpoint)
-  return result
+  const { event_4 } = (await import('./sample/dashboard')).default
+  return event_4
 }
