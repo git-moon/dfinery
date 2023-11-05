@@ -524,9 +524,3 @@ export const event_4 = {
   version: '1.18.11.32254',
   last_compile_time: '2022-05-26T08:55:12+00:00',
 }
-
-export default {
-  event_1,
-  event_3,
-  event_4,
-}
